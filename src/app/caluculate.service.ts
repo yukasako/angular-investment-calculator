@@ -17,6 +17,10 @@ export class CaluculateService {
 
   annualData: AnnualData[] = [];
 
+  floorNumber(value: number) {
+    return Math.floor(value * 1000) / 1000;
+  }
+
   calculate(
     initialInvestment: number,
     annualInvestment: number,
@@ -33,11 +37,13 @@ export class CaluculateService {
         investmentValue - annualInvestment * year - initialInvestment;
       this.annualData.push({
         year: year,
-        interest: interestEarnedInYear,
-        valueEndOfYear: investmentValue,
+        interest: this.floorNumber(interestEarnedInYear),
+        valueEndOfYear: this.floorNumber(investmentValue),
         annualInvestment: annualInvestment,
-        totalInterest: totalInterest,
-        totalAmountInvested: initialInvestment + annualInvestment * year,
+        totalInterest: this.floorNumber(totalInterest),
+        totalAmountInvested: this.floorNumber(
+          initialInvestment + annualInvestment * year,
+        ),
       });
     }
 

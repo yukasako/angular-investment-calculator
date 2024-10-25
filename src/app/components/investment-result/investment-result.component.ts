@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CaluculateService } from '../../caluculate.service';
 
 @Component({
   selector: 'app-investment-result',
@@ -6,4 +7,8 @@ import { Component } from '@angular/core';
   templateUrl: './investment-result.component.html',
   styleUrl: './investment-result.component.css',
 })
-export class InvestmentResultComponent {}
+export class InvestmentResultComponent {
+  constructor(private calculateService: CaluculateService) {}
+
+  annualData = this.calculateService.annualData;
+}
